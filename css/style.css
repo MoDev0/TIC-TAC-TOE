@@ -1,0 +1,15 @@
+.box-container{
+    display: grid;
+    background-color:whitesmoke;
+    grid-template-columns: repeat(3,1fr);
+    padding: 50px;
+    height: 150px;
+    width: 150px;
+
+
+}
+.cell{
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+
+}
