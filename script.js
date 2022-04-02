@@ -4,6 +4,16 @@ const gameBoard=(()=>{
                 [0,0,0],
                 [0,0,0]
                ];
+     
+    const checkRows=(arr)=>{
+        let j=0;
+        for(let i=0;i<3;i++){ 
+            if(arr[i][j]===arr[i][j+1]&&arr[i][j]===arr[i][j+2])
+                return arr[i][j];
+
+        }
+
+    };
 
     const checkWinner=()=>{
 
@@ -16,25 +26,14 @@ const gameBoard=(()=>{
 
 
     };
-    return{matrix,isEmpty};
+    return{matrix,isEmpty,checkRows};
 })();
 
-const player=(name,choice)=>{
+const player=()=>{
     const is_turn=true;
-
-
-
-
-
-
+    
 
 };
-let matrix=[[0,1,2],
-                [3,4,5],
-                [6,7,8]
-               ];
-               matrix[0][0]='X';
-               console.log(matrix);
 
         //  for(let i=0;i<3;i++)
         //  for(let j=0;j<3;j++)
@@ -43,6 +42,11 @@ let matrix=[[0,1,2],
         //  {
         //      console.log(matrix[i][j]);
         //  }      
+
+
+
+        
+   
 
 
 // const displayController=(()=>{
@@ -85,8 +89,9 @@ cells.forEach(cell => {
             
         }
         */
-        if(gameBoard.isEmpty(e))
-        console.log('yes')
+        // if(gameBoard.isEmpty(e))
+        // console.log('yes')
+
 
          indx=cells.indexOf(cell);
 
@@ -95,6 +100,7 @@ cells.forEach(cell => {
           gameBoard.matrix[Math.trunc(indx/3)][indx%3]='x';
          cell.style.backgroundRepeat='no-repeat';
          cell.style.backgroundImage="url('./css/img/n.svg')";
+ 
          
 
  
