@@ -14,6 +14,16 @@ const gameBoard=(()=>{
         }
 
     };
+    const checkCols=(arr)=>{
+        let j=0;
+        for(let i=0;i<3;i++){ 
+            if(arr[j][i]===arr[j+1][i]&&arr[j][i]===arr[j+2][i])
+                return arr[j][i];
+
+        }
+
+
+    };
 
     const checkWinner=()=>{
 
@@ -26,7 +36,7 @@ const gameBoard=(()=>{
 
 
     };
-    return{matrix,isEmpty,checkRows};
+    return{matrix,isEmpty,checkCols};
 })();
 
 const player=()=>{
@@ -41,8 +51,16 @@ const player=()=>{
 
         //  {
         //      console.log(matrix[i][j]);
-        //  }      
+        //  }     
+        let matrix=[['o','o','x'],
+        ['x','o',0],
+        ['x','o','x']
+       ];
+       console.log(gameBoard.checkCols(matrix))
 
+        
+
+        
 
 
         
