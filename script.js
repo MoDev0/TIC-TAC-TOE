@@ -140,7 +140,7 @@ cells.forEach(cell => {
         if(player1.is_turn){
             if(gameBoard.isEmpty(e)){
                 cell.style.backgroundRepeat='no-repeat';
-                cell.style.backgroundImage="url('./css/img/xx.svg')";
+                cell.style.backgroundImage="url('./css/img/x.svg')";
                 // cell.style.backgroundSize="120px"
                 gameBoard.matrix[Math.trunc(indx/3)][indx%3]='x';
                 player1.is_turn=false;
