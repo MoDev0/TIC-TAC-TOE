@@ -20,7 +20,7 @@ const gameBoard=(()=>{
     const checkCols=(arr)=>{
         let j=0;
         for(let i=0;i<3;i++){ 
-            if(arr[i][j]!=0&&arr[j][i]===arr[j+1][i]&&arr[j][i]===arr[j+2][i])
+            if(arr[j][i]!=0&&arr[j][i]===arr[j+1][i]&&arr[j][i]===arr[j+2][i])
                 return arr[j][i];
 
         }
@@ -43,14 +43,36 @@ const gameBoard=(()=>{
     };
 
     const checkTie=(arr)=>{
-        
+        if(!checkWinner(arr))
+        {
+            for(let i=0;i<3;i++)
+                for(let j=0;j<3;j++)
+                    if(arr[i][j]===0)
+                        {
+                            return false;
+                            
+                        }
 
+        }
+        return true;   
 
     };
 
     const checkWinner=(arr)=>{
+        let equalRow=checkRows(arr);
+        let equalCol=checkCols(arr);
+        let equalDiagonal=checkDiagonal(arr);
 
-    //    if (  !( checkRows(arr)||checkCols(arr)||checkDiagonal(arr) )  )
+        if(equalRow)
+            return equalRow;
+        else if(equalCol)
+            return equalCol;
+        else if(equalDiagonal)
+            return equalDiagonal;
+        else 
+        return false;
+
+
 
 
         
@@ -65,55 +87,45 @@ const gameBoard=(()=>{
 
 
     };
-    return{matrix,isEmpty,checkDiagonal};
+    return{matrix,isEmpty,checkWinner,checkTie};
 })();
 
-const player=(choice)=>{
-    const is_turn=true;
+const player=(choice,turn)=>{
+    const is_turn=turn;
+
+    return{choice,is_turn};
     
 
 };
 
-        //  for(let i=0;i<3;i++)
-        //  for(let j=0;j<3;j++)
+let player1=player('x',true);
+let player2=player('o',false);
 
 
-        //  {
-        //      console.log(matrix[i][j]);
-        //  }     
-     let matrix=[ [0,'x',0],
-                 ['x',0,0],
-                  [0,'o',0]
+
+     let matrix=[  [1,1,2],
+                  [1,2,2],
+                  [2,3,3]
        ];
-       console.log(gameBoard.checkDiagonal(matrix))
+       console.log(gameBoard.checkWinner(matrix))
 
         
 
         
 
+let p1=document.querySelector('.p1');
+let p2=document.querySelector('.p2');
 
-        
-   
-
-
-// const displayController=(()=>{
-
-// const createBox=()=>{
-//     const container=document.createElement('div');
-//     for(let i=0;i<9;i++){
-//         const cell=
+let btn=document.createElement('button');
+btn.textContent='Play again';
+btn.addEventListener('click',()=>{
+    window.location.reload();
+})
+let btnDiv=document.querySelector('.btnDiv');
 
 
 
-//     }
 
-    
-// }
-
-
-// }
-
-// )();
 const box=document.querySelector('.box-container');
 let cells=document.querySelectorAll('.box-container div');
 cells=Array.from(cells);
@@ -122,38 +134,59 @@ let indx=0;
 cells.forEach(cell => {
 
     cell.addEventListener('click',(e)=>{
-        /*
+
+        indx=cells.indexOf(cell);
+        
         if(player1.is_turn){
-            if(isCellEmpty){
+            if(gameBoard.isEmpty(e)){
                 cell.style.backgroundRepeat='no-repeat';
-                cell.style.backgroundImage="url('./css/img/x.svg')";
-                gameBoard.checkWinner();
+                cell.style.backgroundImage="url('./css/img/xx.svg')";
+                // cell.style.backgroundSize="120px"
+                gameBoard.matrix[Math.trunc(indx/3)][indx%3]='x';
+                player1.is_turn=false;
+                player2.is_turn=true;
+
 
             }
+            if(gameBoard.checkWinner(gameBoard.matrix)==='x')
+                {
+                    p1.textContent='congrats player1 !';
+                    p1.style.color='white'
+                    btnDiv.appendChild(btn);
 
+                }
+    
 
 
             
         }
-        */
-        // if(gameBoard.isEmpty(e))
-        // console.log('yes')
+        else if(player2.is_turn){
 
+            if(gameBoard.isEmpty(e)){
+                cell.style.backgroundRepeat='no-repeat';
+                cell.style.backgroundImage="url('./css/img/o.svg')";
+                gameBoard.matrix[Math.trunc(indx/3)][indx%3]='o';
+                player1.is_turn=true;
+                player2.is_turn=false;
 
-         indx=cells.indexOf(cell);
+                
 
+            }
+            if(gameBoard.checkWinner(gameBoard.matrix)==='o')
+                {
+                    p2.textContent='congrats player2 !';
+                    p2.style.color='white'
+                    btnDiv.appendChild(btn);
+                }
+            
+    
 
+        }
 
-          gameBoard.matrix[Math.trunc(indx/3)][indx%3]='x';
-         cell.style.backgroundRepeat='no-repeat';
-         cell.style.backgroundImage="url('./css/img/n.svg')";
  
-         
-
- 
-
-
-         
+        
+         if(gameBoard.checkTie(gameBoard.matrix))
+             btnDiv.appendChild(btn);
 
     })
     
