@@ -1,18 +1,28 @@
+@font-face {
+    font-family: Tourney;
+    src: url('./fonts/Tourney/Tourney-Italic-VariableFont_wdth\,wght.ttf');
+
+}
+body{
+    font-family:  Tourney;
+    font-size: larger;
+}
 .box-container{
     display: grid;
-    /* background-color:whitesmoke; */
     grid-template-columns: repeat(3,1fr);
     padding: 50px;
-    height: 150px;
-    width: 150px;
+    height: 300px;
+    width: 300px;
 
 
 }
 .container{
     display: grid;
     place-items: center;
+    
     margin-top: 50px;
 }
+
 .box-container div{
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.8);
@@ -26,3 +36,20 @@
     background-color: grey;
 
 }
+.btnDiv{
+    margin-top: 100px;
+}
+
+@media (max-width: 420px) {
+      .card-container{
+
+        width:fit-content;
+    } 
+     
+
+  
+
+
+
+}
+  
