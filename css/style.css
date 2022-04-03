@@ -41,4 +41,10 @@ body{
 }
 
 
-  
+  @media (max-width: 420px) {
+      .card-container{
+
+        width:fit-content;
+    } 
+     
+}
